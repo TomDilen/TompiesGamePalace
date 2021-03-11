@@ -94,8 +94,8 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
 
             Console.CursorVisible = false;
 
-            string[] aTestGebruiker = Data_GetUser("Joske2", "Joske234!");//test
-            ToonScherm_Slots(aTestGebruiker);
+            //string[] aTestGebruiker = Data_GetUser("Joske2", "Joske234!");//test
+            //ToonScherm_Slots(aTestGebruiker);
 
             ToonMenu(menu, 0, null);
 
@@ -250,6 +250,7 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             {
                 Console.WriteLine("geen gebruikers om te bewerken");
                 Console.ReadLine();
+                Console.Clear();
                 return;
             }
 
@@ -348,6 +349,7 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             {
                 Console.WriteLine("geen gebruikers om te bewerken");
                 Console.ReadLine();
+                Console.Clear();
                 return;
             }
 
@@ -441,6 +443,7 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             {
                 Console.WriteLine("geen gebruikers om te verwijderen");
                 Console.ReadLine();
+                Console.Clear();
                 return;
             }
 
@@ -520,6 +523,7 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
                 Console.WriteLine($"dag {aGebruiker[(int)Gebruiker.Gebruikersnaam]}, u bent reeds ingelogd");
                 Console.WriteLine($"druk een toets om terug te keren naar het hoofdscherm");
                 Console.ReadKey(true);
+                return aGebruiker;
             }
 
             Console.Write("Geef uw gebruikersnaam: ");
@@ -580,8 +584,8 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             int kaartTTspeler = 0;
             int kaartTTcomputer = 0;
 
-            int aantalKaartenGehadComputer = 0;
-            int aantalKaartenGehadSpeler = 0;
+            //int aantalKaartenGehadComputer = 0;
+            //int aantalKaartenGehadSpeler = 0;
 
             string[,] kaartIcoontjes = LaadKaartdeck();
 
@@ -1000,29 +1004,29 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
                 //end debug
 
                 bovensteKaartIndex = 0;
-                aantalKaartenGehadComputer = 0;
-                aantalKaartenGehadSpeler = 0;
+                //aantalKaartenGehadComputer = 0;
+                //aantalKaartenGehadSpeler = 0;
                 kaartTTspeler = 0;
                 kaartTTcomputer = 0;
             }
             //-------------------------------------------------------------------------------------------
-            string KaartToString(int aKaart)
-            {
-                return kleuren[kaartBoek[aKaart, 1]] + waardes[kaartBoek[aKaart, 0]];
-            }
+            //string KaartToString(int aKaart)
+            //{
+            //    return kleuren[kaartBoek[aKaart, 1]] + waardes[kaartBoek[aKaart, 0]];
+            //}
             //-------------------------------------------------------------------------------------------
-            string KaartToConsoleString(int aKaart)
-            {
-                //harten =char3, ruiten=4,klaveren=5,schoppen=6
-                //return ((char)(kaartBoek[aKaart, 1]+3)).ToString() + kaartBoek[aKaart, 0];
-                return ((char)(kaartBoek[aKaart, 1] + 3)).ToString() + waardes[kaartBoek[aKaart, 0]];
-            }
+            //string KaartToConsoleString(int aKaart)
+            //{
+            //    //harten =char3, ruiten=4,klaveren=5,schoppen=6
+            //    //return ((char)(kaartBoek[aKaart, 1]+3)).ToString() + kaartBoek[aKaart, 0];
+            //    return ((char)(kaartBoek[aKaart, 1] + 3)).ToString() + waardes[kaartBoek[aKaart, 0]];
+            //}
             //-------------------------------------------------------------------------------------------
-            void KaartenBoekToString()
-            {
-                for (int i = 0; i < 52; i++)
-                    Console.WriteLine(KaartToString(i) + " " + KaartToConsoleString(i));
-            }
+            //void KaartenBoekToString()
+            //{
+            //    for (int i = 0; i < 52; i++)
+            //        Console.WriteLine(KaartToString(i) + " " + KaartToConsoleString(i));
+            //}
 
         }
 
@@ -1359,6 +1363,8 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             const int INFO_ICOONTJES_X = 78;
             const int INFO_ICOONTJES_Y = 6;
 
+            const int REFRESH_WEEL_DELAY = 8;
+
             //------------------------------------------------------afblijven
             //-------deze hard coderen voor performantie en duidelijkere code
             int[] X_ICOONTJES_IN_KADER_WIEL = {
@@ -1384,14 +1390,14 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             //------------------------------------------------
             string[,] icoontjes = LaadSlotsEnMemoryIcoontjes();
 
-            int[,] arrWiel = new int[3, 75];
+            int[,] arrWiel = new int[3, 100];
             int[] draaienTot = new int[arrWiel.GetLength(0)];
 
             double[] uitbetalingen = { 0.6, 1, 1.4, 2, 4, 10, 20 };
 
             int[] randomTePakkenIcoontjes = {
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
                 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
                 3, 3, 3, 3, 3, 3, 3,
                 4, 4, 4, 4,
@@ -1587,6 +1593,9 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             {
                 shuffleWielen();
 
+
+                ConsoleColor kleurHerstellen = Console.ForegroundColor;
+
                 string[] wiel1strings = new string[arrWiel.GetLength(1) * 4];
                 ConsoleColor[] wiel1kleuren = new ConsoleColor[wiel1strings.Length];
                 string[] wiel2strings = new string[arrWiel.GetLength(1) * 4];
@@ -1632,7 +1641,11 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
                 //********************************************************************
                 // DE EFFECTIEVE ANNIMATIE
                 //********************************************************************
-                ConsoleColor kleurHerstellen = Console.ForegroundColor;
+                int slaaptijd = REFRESH_WEEL_DELAY;
+                double vertragenVanaf = (int)(draaienTot[2] * 3.2); //hoe hoger laatste getal hoe later begint te vertagen
+                double vertragingsstap = REFRESH_WEEL_DELAY / (draaienTot[2] *0.12); //hoe lager laatste getel ,hoe langer hij uitbolt
+                double vertrager = 0;
+
                 int currentWielStringCursor = 0;
                 do
                 {
@@ -1671,7 +1684,17 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
                         break;
                     }
                     currentWielStringCursor++;
-                    Thread.Sleep(15);
+
+
+                    //-------------------------------------------------op het einde vertragen
+                    if (currentWielStringCursor > vertragenVanaf)
+                    {
+                        vertrager += vertragingsstap;
+                        Thread.Sleep(slaaptijd + (int)vertrager);
+                    }
+                    //-----------------------------------------------------------------------
+
+                    Thread.Sleep(slaaptijd);
                 } while (true);//einde animatie
 
                 Console.ForegroundColor = kleurHerstellen;
@@ -1688,9 +1711,9 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
                         arrWiel[wiel, vlakjeInWiel] = randomTePakkenIcoontjes[rnd.Next(randomTePakkenIcoontjes.Length)];
                     }
                 }
-                draaienTot[0] = rnd.Next((arrWiel.GetLength(1) / 15), ((arrWiel.GetLength(1) / 2) - 1));
-                draaienTot[1] = draaienTot[0] + rnd.Next(((arrWiel.GetLength(1) / 4) - 1));
-                draaienTot[2] = draaienTot[1] + rnd.Next(((arrWiel.GetLength(1) / 4) - 1));
+                draaienTot[0] = rnd.Next((arrWiel.GetLength(1) / 10), ((arrWiel.GetLength(1) / 2) - 1));
+                draaienTot[1] = draaienTot[0] + rnd.Next(((arrWiel.GetLength(1) / 20)),((arrWiel.GetLength(1) / 4) - 1));
+                draaienTot[2] = draaienTot[1] + rnd.Next(((arrWiel.GetLength(1) / 20)),((arrWiel.GetLength(1) / 4) - 1));
                 Debug.Write("\nwiel 0: draaienTot: " + draaienTot[0] + ": ");
                 for (int i = 0; i < arrWiel.GetLength(1); i++) Debug.Write(arrWiel[0, i]);
                 Debug.Write("\nwiel 1: draaienTot: " + draaienTot[1] + ": ");
@@ -1838,6 +1861,8 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
             //volgens de bron zou dit de snelste mannier zijn om een bestand te lezen met een buffersize van 128
             //de Encoding UTF8 heb ik nodig om de 8bits karakters die ik heb weggeschreven juist te kunnen inlezen
 
+            if (!File.Exists(PAD_GEBRUIKERS)) return null;
+
             const Int32 BufferSize = 128;
             using (var fileStream = File.OpenRead(PAD_GEBRUIKERS))
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
@@ -1904,7 +1929,7 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
         static bool Data_GebruikerBestaat(string aGebruikersnaam)
         {
 
-
+            if (!File.Exists(PAD_GEBRUIKERS)) return false;
 
             //bron: https://stackoverflow.com/questions/8037070/whats-the-fastest-way-to-read-a-text-file-line-by-line
             const Int32 BufferSize = 128;
@@ -1981,8 +2006,9 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
         /// <returns></returns>
         static string[] Data_GetAlleGebruikersnamen()
         {
-            string alleGebruikersnamen = string.Empty;
+            if (!File.Exists(PAD_GEBRUIKERS)) return null;
 
+            string alleGebruikersnamen = string.Empty;
             //bron: https://stackoverflow.com/questions/8037070/whats-the-fastest-way-to-read-a-text-file-line-by-line
             const Int32 BufferSize = 128;
             using (var fileStream = File.OpenRead(PAD_GEBRUIKERS))
