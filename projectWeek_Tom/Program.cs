@@ -1830,7 +1830,7 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
         /// </summary>
         static int Data_AddUser(string aGebruikersnaam, string aPaswoord, int aSaldo)
         {
-            //TODO: username bestaat al nog implementeren en -1 teruggeven
+
 
             if (!IsValidGebruikersnaam(aGebruikersnaam))
                 return -3;
@@ -1838,7 +1838,7 @@ namespace SjabloonMenuMetGenesteMenusEnSchermen
                 return -2;
 
             if (Data_GebruikerBestaat(aGebruikersnaam))
-                return -3;
+                return -1;
 
 
             string encriptedPaswoord = EncriptString(aPaswoord, aGebruikersnaam);
